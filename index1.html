@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Medical Chatbot Documentation</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f8fc;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    header {
+      background: #2a9d8f;
+      padding: 20px;
+      color: white;
+      font-size: 1.5rem;
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+
+    .buttons-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin: 30px auto;
+      gap: 15px;
+      max-width: 900px;
+    }
+
+    .topic-btn {
+      background: white;
+      border: 2px solid #2a9d8f;
+      color: #2a9d8f;
+      padding: 15px 25px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 1rem;
+      min-width: 180px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .topic-btn:hover {
+      background: #2a9d8f;
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    .content-box {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-height: 200px;
+      margin: 30px auto;
+      padding: 20px;
+      width: 70%;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.4s ease-in-out;
+    }
+
+    .content-box.show {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Medical Chatbot Using SLM</h1>
+  </header>
+
+  <main>
+    <div class="buttons-container">
+      <button class="topic-btn" data-topic="title">Title</button>
+      <button class="topic-btn" data-topic="requirements">Client Requirements</button>
+      <button class="topic-btn" data-topic="problem">Problem Statement</button>
+      <button class="topic-btn" data-topic="objectives">Objectives</button>
+      <button class="topic-btn" data-topic="methodology">Methodology</button>
+      <button class="topic-btn" data-topic="tools">Tools</button>
+      <button class="topic-btn" data-topic="results">Results</button>
+      <button class="topic-btn" data-topic="limitations">Limitations</button>
+      <button class="topic-btn" data-topic="conclusion">Conclusion</button>
+    </div>
+
+    <section id="content" class="content-box">
+      <p>Click any topic to view details here.</p>
+    </section>
+  </main>
+
+  <script>
+    const contentBox = document.getElementById("content");
+
+    const topics = {
+      title: "This project builds a medical chatbot using a Small Language Model (SLM).<br> It analyzes user symptoms or reports, predicts possible diseases,<br> and suggests suitable precautions and medicines in a lightweight and efficient way.",
+      requirements: "The chatbot should accept symptoms or medical reports as input, analyze them, and predict the possible disease.<br> It must also suggest suitable precautions and medicines,<br> while running efficiently on a lightweight Small Language Model (SLM) instead of large, resource-heavy models (LLMs).",
+      problem: "Many people search for symptoms online and end up with unreliable or confusing results.<br> There is a need for an AI-powered chatbot trained on medical data that can give trustworthy suggestions.",
+      objectives: "To build a medical chatbot using a Small Language Model (DistilBERT).<br> It will be trained on medical datasets to predict diseases and provide users with precautions and medicines.",
+      methodology: "The process involves: <br>(1) collecting a medical dataset of symptoms and diseases,<br> (2) preprocessing and tokenizing text,<br> (3) training DistilBERT,<br> (4) building a prediction function for disease,<br> and (5) testing it with user inputs.",
+      tools: "Python, Hugging Face Transformers, PyTorch, Kaggle dataset.",
+      results: "The chatbot successfully predicts diseases based on given symptoms <br> and provides matching precautions and medicines with good accuracy.",
+      limitations: "Not 100% accurate. Limited to dataset diseases.",
+      conclusion: "A Small Language Model like DistilBERT can be effectively used to create lightweight medical chatbots.<br> They provide quick, useful, and basic health suggestions to users.",
+    };
+
+    document.querySelectorAll(".topic-btn").forEach(button => {
+      button.addEventListener("click", () => {
+        const topicKey = button.getAttribute("data-topic");
+        contentBox.classList.remove("show"); // reset animation
+        setTimeout(() => {
+          contentBox.innerHTML = `<p>${topics[topicKey]}</p>`;
+          contentBox.classList.add("show"); // show with animation
+        }, 50);
+      });
+    });
+  </script>
+</body>
+</html>
